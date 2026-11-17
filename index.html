@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swahaba Islamic Academy - Ettikkulam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        luxury: {
+                            50: '#fcfbfa',
+                            100: '#f5f2ed',
+                            600: '#c5a059',
+                            700: '#997a38',
+                            900: '#1e293b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        h1, h2, h3, h4, .font-luxury { font-family: 'Playfair Display', serif; }
+        .glow-blur {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(197,160,89,0.18) 0%, rgba(16,185,129,0.08) 60%, transparent 100%);
+            filter: blur(60px);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 relative overflow-x-hidden">
+
+    <!-- Top Navigation / Header -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="triggerLogoUpload()">
+                <div class="w-12 h-12 rounded-full bg-luxury-100 dark:bg-slate-800 border-2 border-luxury-600/40 flex items-center justify-center text-luxury-700 shadow-sm relative overflow-hidden">
+                    <span id="logoDisplay" class="font-luxury font-bold text-xl">S</span>
+                    <img id="logoImg" class="w-full h-full object-cover hidden" alt="Academy Logo">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-[10px] text-white font-medium text-center leading-tight">Edit<br>Logo</div>
+                </div>
+                <div>
+                    <h1 class="font-luxury font-bold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white">SWAHABA ISLAMIC</h1>
+                    <p class="text-[11px] sm:text-xs tracking-wider text-luxury-700 font-semibold">ETTIKKULAM • KANNUR • KERALA</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <button onclick="toggleEditMode()" id="editModeBtn" class="px-3 py-1.5 rounded-full text-xs font-semibold border border-luxury-600/50 text-luxury-700 dark:text-luxury-600 hover:bg-luxury-100 dark:hover:bg-slate-800 transition-colors">
+                    Edit Photos
+                </button>
+                <button onclick="toggleDarkMode()" class="p-2.5 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Toggle Theme">
+                    <svg id="sunIcon" class="w-5 h-5 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" class="w-5 h-5 block dark:hidden text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+                <button onclick="toggleMobileMenu()" class="p-2.5 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <svg class="w-5 h-5 text-slate-700 dark:text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropdown Navigation Menu -->
+        <div id="mobileMenu" class="hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 py-4 space-y-2">
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">About Academy</a>
+            <a href="#facilities" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Campus & Facilities</a>
+            <a href="#programs" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">WAFY Programs</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 px-3 rounded-lg text-sm font-medium text-emerald-700 dark:text-emerald-400 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">Admission Enquiry</a>
+        </div>
+    </header>
+
+    <!-- Hidden file inputs -->
+    <input type="file" id="logoFileInput" class="hidden" accept="image/*" onchange="handleLogoUpload(event)">
+    <input type="file" id="slideFileInput" class="hidden" accept="image/*" onchange="handleSlideUpload(event)">
+
+    <!-- Hero Section -->
+    <section class="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="glow-blur top-10 left-1/4"></div>
+        <div class="glow-blur bottom-0 right-1/4"></div>
+
+        <div class="text-center max-w-3xl mx-auto space-y-6">
+            <p class="text-2xl sm:text-3xl text-luxury-700 dark:text-luxury-600 font-serif">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+            <div class="inline-block px-4 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-semibold tracking-wider">
+                Affiliation No: 117 • WAFY • CIC • North Zone • Thamheediyya (Preparatory)
+            </div>
+            <h2 class="font-luxury font-bold text-4xl sm:text-5xl lg:text-6xl text-slate-900 dark:text-white leading-tight">
+                Swahaba Islamic Academy
+            </h2>
+            <p class="font-luxury italic text-2xl sm:text-3xl text-luxury-700 dark:text-luxury-600 font-medium">
+                Ettikkulam, Kannur
+            </p>
+            <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+                Nurturing righteous scholarship, moral character, and academic excellence through the integrated WAFY educational system.
+            </p>
+            <div class="pt-4 flex flex-wrap justify-center gap-4">
+                <a href="#contact" class="inline-flex items-center space-x-2 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5">
+                    <span>Admission Inquiry</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+                <a href="#facilities" class="inline-flex items-center space-x-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-luxury-600 text-slate-800 dark:text-slate-200 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all">
+                    <span>Explore Campus</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Banner -->
+    <section id="about" class="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center relative">
+        <div class="inline-block px-4 py-1 rounded-full bg-luxury-100 dark:bg-slate-800 text-luxury-700 dark:text-luxury-600 text-xs font-bold tracking-widest uppercase mb-4">
+            Learning For Life
+        </div>
+        <h2 class="font-luxury font-bold text-3xl sm:text-4xl lg:text-5xl text-slate-900 dark:text-white mb-4">
+            Beyond Education – Learning for Life
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-2xl mx-auto">
+            Building Knowledge, Character, Communication & Future-Ready Skills in a serene coastal academic environment.
+        </p>
+    </section>
+
+    <!-- Facility Carousels (Uniform 16:10 Ratio) -->
+    <main id="facilities" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 pb-20">
+        
+        <!-- Entrance & Campus View -->
+        <section class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 dark:border-slate-800">
+            <div class="flex flex-wrap justify-between items-end mb-6 gap-4">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-luxury-700 font-semibold">Campus Tour</span>
+                    <h3 class="font-luxury font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1">Entrance & Architecture</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">Welcoming gateway and pristine campus infrastructure.</p>
+                </div>
+                <button onclick="triggerSlideUpload('entrance')" class="edit-control hidden px-4 py-2 rounded-xl bg-luxury-600 text-white text-xs font-semibold shadow hover:bg-luxury-700 transition">
+                    + Change Current Photo
+                </button>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 dark:bg-slate-800 shadow-inner">
+                <img id="entranceImg" src="https://i.ibb.co/pvBqf0Bj/6-A8560-B9-B1-C8-4761-8-D66-83-CDDED9-D9-F0.png" class="w-full h-full object-cover transition-all duration-500" alt="Entrance">
+                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center bg-black/60 backdrop-blur-md px-4 py-2.5 rounded-xl text-white text-xs font-medium">
+                    <span id="entranceCaption">Slide 1 • Main Campus & Entrance</span>
+                    <div class="flex space-x-3">
+                        <button onclick="slideCarousel('entrance', -1)" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/25 transition">◀</button>
+                        <button onclick="slideCarousel('entrance', 1)" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/25 transition">▶</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Library Carousel -->
+        <section class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 dark:border-slate-800">
+            <div class="flex flex-wrap justify-between items-end mb-6 gap-4">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-luxury-700 font-semibold">Knowledge Hub</span>
+                    <h3 class="font-luxury font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1">Library & Study Halls</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">A vast repository of classical Islamic texts and contemporary literature.</p>
+                </div>
+                <button onclick="triggerSlideUpload('library')" class="edit-control hidden px-4 py-2 rounded-xl bg-luxury-600 text-white text-xs font-semibold shadow hover:bg-luxury-700 transition">
+                    + Change Current Photo
+                </button>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 dark:bg-slate-800 shadow-inner">
+                <img id="libraryImg" src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover transition-all duration-500" alt="Library">
+                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center bg-black/60 backdrop-blur-md px-4 py-2.5 rounded-xl text-white text-xs font-medium">
+                    <span id="libraryCaption">Slide 1 • Reference & Reading Room</span>
+                    <div class="flex space-x-3">
+                        <button onclick="slideCarousel('library', -1)" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/25 transition">◀</button>
+                        <button onclick="slideCarousel('library', 1)" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/25 transition">▶</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Computer Lab Carousel -->
+        <section class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-200 dark:border-slate-800">
+            <div class="flex flex-wrap justify-between items-end mb-6 gap-4">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-luxury-700 font-semibold">Digital Literacy & Tech</span>
+                    <h3 class="font-luxury font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white mt-1">Computer & Technology Lab</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">Equipped with modern computing systems for research and digital fluency.</p>
+                </div>
+                <button onclick="triggerSlideUpload('lab')" class="edit-control hidden px-4 py-2 rounded-xl bg-luxury-600 text-white text-xs font-semibold shadow hover:bg-luxury-700 transition">
+                    + Change Current Photo
+                </button>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 dark:bg-slate-800 shadow-inner">
+                <img id="labImg" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover transition-all duration-500" alt="Computer Lab">
+                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center bg-black/60 backdrop-blur-md px-4 py-2.5 rounded-xl text-white text-xs font-medium">
+                    <span id="labCaption">Slide 1 • Digital Learning Lab</span>
+                    <div class="flex space-x-3">
+                        <button onclick="slideCarousel('lab', -1)" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/25 transition">◀</button>
+                        <button onclick="slideCarousel('lab', 1)" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/25 transition">▶</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academic Programs -->
+        <section id="programs" class="pt-4">
+            <div class="text-center mb-10">
+                <span class="text-xs uppercase tracking-widest text-luxury-700 font-semibold">Curriculum</span>
+                <h3 class="font-luxury font-bold text-3xl sm:text-4xl text-slate-900 dark:text-white mt-1">Academic Structure</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-luxury font-bold text-xl mb-5">01</div>
+                    <h4 class="font-luxury font-bold text-2xl text-slate-900 dark:text-white mb-2">Thamheediyya (Preparatory)</h4>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Foundational 2-year preparatory phase integrating Higher Secondary (+1, +2) studies with Arabic language mastery, Quranic sciences, and Islamic jurisprudence.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg">
+                    <div class="w-12 h-12 rounded-2xl bg-luxury-100 dark:bg-slate-800 text-luxury-700 dark:text-luxury-600 flex items-center justify-center font-luxury font-bold text-xl mb-5">02</div>
+                    <h4 class="font-luxury font-bold text-2xl text-slate-900 dark:text-white mb-2">Aliya (Undergraduate)</h4>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                        Advanced 4-year undergraduate program combining recognized university degrees with deep specialization in Islamic theology, literature, and leadership.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & WhatsApp Enquiry Section -->
+        <section id="contact" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-200 dark:border-slate-800">
+            <div class="grid lg:grid-cols-5 gap-10">
+                
+                <!-- Left Info -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-luxury-700 font-semibold">Get In Touch</span>
+                        <h3 class="font-luxury font-bold text-3xl text-slate-900 dark:text-white mt-1">Admission & Enquiries</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mt-2 leading-relaxed">
+                            Have questions about admissions, eligibility, or campus life? Reach out directly via phone or submit the form for instant WhatsApp support.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700">
+                            <p class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">Primary Contact / WhatsApp</p>
+                            <a href="tel:+917034983982" class="text-lg font-bold text-emerald-700 dark:text-emerald-400 hover:underline mt-0.5 block">+91 70349 83982</a>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700">
+                            <p class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">Secondary Contact</p>
+                            <a href="tel:+918891380708" class="text-lg font-bold text-slate-900 dark:text-white hover:underline mt-0.5 block">+91 88913 80708</a>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700">
+                            <p class="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">Campus Location</p>
+                            <p class="text-sm font-medium text-slate-800 dark:text-slate-200 mt-1">Swahaba Islamic Academy, Ettikkulam, Kannur District, Kerala</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Enquiry Form -->
+                <div class="lg:col-span-3">
+                    <form onsubmit="submitWhatsAppEnquiry(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2">Student / Guardian Name</label>
+                            <input type="text" id="studentName" required placeholder="Enter full name" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-emerald-600 text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2">Phone Number</label>
+                            <input type="tel" id="studentPhone" required placeholder="Enter contact number" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-emerald-600 text-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2">Enquiry Category</label>
+                            <select id="enquiryCategory" class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-emerald-600 text-sm">
+                                <option value="Thamheediyya (Preparatory) Admission">Thamheediyya (Preparatory) Admission</option>
+                                <option value="WAFY Course Details">WAFY Course Details</option>
+                                <option value="Hostel & Campus Facilities">Hostel & Campus Facilities</option>
+                                <option value="General Enquiry">General Enquiry</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-2">Message</label>
+                            <textarea id="enquiryMessage" rows="4" placeholder="Write your admission or academic question..." class="w-full px-4 py-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-emerald-600 text-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-base shadow-lg transition-all transform hover:-translate-y-0.5">
+                            Submit Enquiry via WhatsApp
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <h4 class="font-luxury font-bold text-xl text-white">Swahaba Islamic Academy</h4>
+                <p class="text-xs text-luxury-600 tracking-wider mt-1">ETTIKKULAM • KANNUR • KERALA • AFFILIATION NO: 117</p>
+            </div>
+            <div class="text-sm space-y-1">
+                <p>Contact: <a href="tel:+917034983982" class="text-white hover:text-luxury-600 font-medium">7034983982</a> | <a href="tel:+918891380708" class="text-white hover:text-luxury-600 font-medium">8891380708</a></p>
+                <p class="text-xs text-slate-500">© 2026 Swahaba Islamic Academy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel Data
+        const carousels = {
+            entrance: {
+                index: 0,
+                slides: [
+                    { src: "https://i.ibb.co/pvBqf0Bj/6-A8560-B9-B1-C8-4761-8-D66-83-CDDED9-D9-F0.png", caption: "Slide 1 • Main Campus & Entrance" },
+                    { src: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80", caption: "Slide 2 • Academic Block" }
+                ]
+            },
+            library: {
+                index: 0,
+                slides: [
+                    { src: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80", caption: "Slide 1 • Reference & Reading Room" },
+                    { src: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=80", caption: "Slide 2 • Islamic & Academic Archives" }
+                ]
+            },
+            lab: {
+                index: 0,
+                slides: [
+                    { src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80", caption: "Slide 1 • Digital Learning Lab" },
+                    { src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80", caption: "Slide 2 • Student Research Station" }
+                ]
+            }
+        };
+
+        let activeUploadTarget = null;
+        let isEditMode = false;
+
+        function slideCarousel(type, dir) {
+            const c = carousels[type];
+            c.index = (c.index + dir + c.slides.length) % c.slides.length;
+            updateCarouselUI(type);
+        }
+
+        function updateCarouselUI(type) {
+            const c = carousels[type];
+            document.getElementById(type + 'Img').src = c.slides[c.index].src;
+            document.getElementById(type + 'Caption').textContent = c.slides[c.index].caption;
+        }
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const controls = document.querySelectorAll('.edit-control');
+            const btn = document.getElementById('editModeBtn');
+            controls.forEach(el => el.classList.toggle('hidden', !isEditMode));
+            btn.textContent = isEditMode ? 'Done Editing' : 'Edit Photos';
+            btn.classList.toggle('bg-luxury-600', isEditMode);
+            btn.classList.toggle('text-white', isEditMode);
+        }
+
+        function triggerLogoUpload() {
+            document.getElementById('logoFileInput').click();
+        }
+
+        function handleLogoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('logoDisplay').classList.add('hidden');
+                const img = document.getElementById('logoImg');
+                img.src = e.target.result;
+                img.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function triggerSlideUpload(type) {
+            activeUploadTarget = type;
+            document.getElementById('slideFileInput').click();
+        }
+
+        function handleSlideUpload(event) {
+            const file = event.target.files[0];
+            if (!file || !activeUploadTarget) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const c = carousels[activeUploadTarget];
+                c.slides[c.index].src = e.target.result;
+                updateCarouselUI(activeUploadTarget);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function submitWhatsAppEnquiry(event) {
+            event.preventDefault();
+            const name = document.getElementById('studentName').value.trim();
+            const phone = document.getElementById('studentPhone').value.trim();
+            const category = document.getElementById('enquiryCategory').value;
+            const message = document.getElementById('enquiryMessage').value.trim();
+
+            const whatsappNumber = "917034983982";
+            const text = `*Swahaba Islamic Academy - Admission Enquiry*%0A%0A` +
+                         `*Name:* ${encodeURIComponent(name)}%0A` +
+                         `*Phone:* ${encodeURIComponent(phone)}%0A` +
+                         `*Category:* ${encodeURIComponent(category)}%0A` +
+                         `*Message:* ${encodeURIComponent(message || 'N/A')}`;
+
+            window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>
